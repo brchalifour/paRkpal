@@ -68,3 +68,33 @@ oldest5 %>%
 ![Year-on-Year Visitor Counts at the Oldest National Parks](images/oldest5.png)
 
 Data source: https://data.world/garyhoov/national-parks-sorted-by-total-attendance-and-by-year
+
+
+## Animal Species Recorded in the National Park System
+
+The National Park Service publishes a database of plant and animal species identified and verified to be present in indiviual national parks. These records are made available to the public on the National Park Species Portal (though exceptions are made for threatened species). Lots of interesting metadata can be found in these records, including categories of species found in parks, taxonomic rankings, scientific and common names, nativeness, etc. We read in the entirety of this available data to show what categories of animals make up a larger proportion of recordings in different parks.
+
+```{r}
+species <- read.csv("https://raw.githubusercontent.com/brchalifour/paRkpal/master/data/species.csv")
+
+speciesTally <- species %>% group_by(Park_Name, Category) %>% tally()
+
+animalTally <- speciesTally %>% dplyr::filter(!(Category %in% c("Vascular Plant", "Nonvascular Plant", "Algae", "Fungi")))
+                      
+ggplot(animalTally, aes(fill=Category, y=n, x=Park_Name)) + 
+  geom_bar(stat="identity", position = "fill") +
+  scale_fill_manual(values = park_palette("death_valley")) +
+  theme_minimal() +
+  labs(y="Proportion of Species Recorded", x="Category") +
+  theme(axis.title.x = element_blank()) +
+  theme(legend.text=element_text(size=12), legend.title=element_text(size=14,face="bold")) +
+  theme(axis.text=element_text(size=10),
+        axis.title=element_text(size=14,face="bold")) +
+  theme(axis.title.y = element_text(margin = margin(t = 0, r = 20, b = 0, l = 0))) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+```
+
+![Stacked Bar Plot of Recorded Animal Species Categories](Stacked_Bar_Plot.png)
+
+
+Data source: https://irma.nps.gov/NPSpecies
