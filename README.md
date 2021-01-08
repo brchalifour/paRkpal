@@ -140,4 +140,6 @@ head(SD.sepal)
 
 ![Stripchart of Average Sepal Length in Three Irises](images/Stripchart.png)
 
+Data Source: Fisher, R. A. (1936) The use of multiple measurements in taxonomic problems. Annals of Eugenics, 7, Part II, 179–188.
+
 ### So, where will your data take you?
