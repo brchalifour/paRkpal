@@ -44,6 +44,19 @@ ggplot(data = top10) +
 
 ![Top 10 Most-Visited US National Parks (2019)](images/ParkVisitors2019.png)
 
+We can also use this visitor data to create a pie chart showing visitation percentage in the top 10 most visited parks.
+
+```{r}
+top10 <- visits[visits$Rank <= 10, ] # Subset to 10 most-visited parks
+
+top10Parks <- factor(top10$ParkName, levels = top10$ParkName)
+
+# Create pie chart
+pie(visits$PercentOfTotal[top10Parks], labels = visits$ParkName[top10Parks], main="Visitation Percentage in Top Ten Most Popular Parks", col=park_palette("smoky_mountains1"))
+```
+
+![Top 10 Most-Visited US National Parks (2019)](images/Pie_Chart.png)
+
 Data source: https://irma.nps.gov/Stats/SSRSReports/National%20Reports/Annual%20Park%20Ranking%20Report%20(1979%20-%20Last%20Calendar%20Year)
 
 
@@ -95,6 +108,5 @@ ggplot(animalTally, aes(fill=Category, y=n, x=Park_Name)) +
 ```
 
 ![Stacked Bar Plot of Recorded Animal Species Categories](images/Stacked_Bar_Plot.png)
-
 
 Data source: https://irma.nps.gov/NPSpecies
