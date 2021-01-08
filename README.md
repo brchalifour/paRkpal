@@ -94,7 +94,7 @@ ggplot(animalTally, aes(fill=Category, y=n, x=Park_Name)) +
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
 ```
 
-![Stacked Bar Plot of Recorded Animal Species Categories](Stacked_Bar_Plot.png)
+![Stacked Bar Plot of Recorded Animal Species Categories](images/Stacked_Bar_Plot.png)
 
 
 Data source: https://irma.nps.gov/NPSpecies
