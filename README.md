@@ -111,4 +111,33 @@ ggplot(animalTally, aes(fill=Category, y=n, x=Park_Name)) +
 
 Data source: https://irma.nps.gov/NPSpecies
 
+## Average Sepal Length in Three Iris Species
+
+We can use the built-in iris dataset in R to look at average sepal length among three species of irises (Iris setosa, versicolor, and virginica). Our paRkpals look great even when you only need to use a few colors!
+
+```{r}
+# Get the mean sepal length of each iris species
+Mean.sepal <- aggregate(Sepal.Length ~ Species, data = iris, FUN = mean)
+head(Mean.sepal)
+
+# Get the standard deviation of each iris species
+SD.sepal <- aggregate(Sepal.Length ~ Species, data = iris, FUN = sd)
+head(SD.sepal)
+
+# Plot the data as a stripchart
+{stripchart(Sepal.Length ~ Species, data = iris, method = "jitter", 
+            vertical = TRUE, pch = 16, col = park_palette("mount_rainier2"),
+            ylab = "Sepal Length (in cm)", ylim = c(2, 8), xlab = "Iris Species",
+            cex.axis = 0.8,
+            main = "Sepal Length in Three Iris Species")
+  
+  segments(x0 = c(1:3) , x1 = c(1:3) ,
+           y0 = Mean.sepal$Sepal.Length-SD.sepal$Sepal.Length,
+           y1 = Mean.sepal$Sepal.Length+SD.sepal$Sepal.Length)
+  
+  points(Mean.sepal$Sepal.Length ~ c(1:3), pch = 16, cex = 1.2)}
+```
+
+![Stripchart of Average Sepal Length in Three Irises](images/Stripchart.png)
+
 ### So, where will your data take you?
