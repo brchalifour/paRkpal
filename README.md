@@ -110,3 +110,5 @@ ggplot(animalTally, aes(fill=Category, y=n, x=Park_Name)) +
 ![Stacked Bar Plot of Recorded Animal Species Categories](images/Stacked_Bar_Plot.png)
 
 Data source: https://irma.nps.gov/NPSpecies
+
+# So, where will your data take you?
